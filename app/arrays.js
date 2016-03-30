@@ -58,7 +58,19 @@ exports.arraysAnswers = {
   },
 
   duplicates : function(arr) {
-// can't get this to work
+    var uniq = arr
+    .map((number) => {
+      return {count: 1, number: number};
+    }).reduce((a, b) => {
+      a[b.number] = (a[b.number] || 0) + b.count;
+      return a;
+    }, {});
+
+    var results = Object.keys(uniq).filter((a) => uniq[a] > 1);
+
+    for(var i = 0; i < results.length; i++) { results[i] = parseInt(results[i], 10); }
+
+    return results;
   },
 
   square : function(arr) {
